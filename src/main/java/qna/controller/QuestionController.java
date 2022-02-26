@@ -22,8 +22,17 @@ public class QuestionController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
+		RequestFactory factory = new RequestFactory(request, response);
+		
+		HttpServletRequest req = factory.getReq();
+		
+		String title = req.getParameter("title").toString();
+		String body = req.getParameter("body").toString();
+		
+		System.out.println(title);
+		System.out.println(body);
+		
 	}
 
 }

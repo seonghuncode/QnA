@@ -4,9 +4,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>질문하기</title>
 </head>
 <body>
-	<h1> Hello World</h1>
+	<div>
+		<h1>질문하기</h1>
+	</div>
+	
+	<div>
+		<form action="/question/q/add" method="post">
+		<div>
+			<input type = "text"name="title" />
+		</div>
+		<div>
+			<input type = "text"name="body"/>
+		</div>
+		<div>
+			<button type="submit"질문하기> </button>
+			<button type="button" 취소> </button>
+		</div>
+		</form>>
+	</div>
+	
 </body>
 </html>
