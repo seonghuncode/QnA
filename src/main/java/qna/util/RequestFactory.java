@@ -36,7 +36,7 @@ public class RequestFactory {
 	
 	//jsp로 보내주는 로직
 	public void forwardToJsp(String path) {
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF" + path + ".jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/" + path + ".jsp");
 		// -->path만 입력해주면 이동하게 만들어 준다 자동으로
 		
 		

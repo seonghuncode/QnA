@@ -14,16 +14,16 @@
 	<div>
 		<form action="/question/q/add" method="post">
 		<div>
-			<input type = "text"name="title" />
+			<input type = "text" name="title" />
 		</div>
 		<div>
-			<input type = "text"name="body"/>
+			<input type = "text" name="body"/>
 		</div>
 		<div>
-			<button type="submit"질문하기> </button>
-			<button type="button" 취소> </button>
+			<button type="submit">질문하기 </button>
+			<button type="button"> 취소 </button>
 		</div>
-		</form>>
+		</form>
 	</div>
 	
 </body>
