@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!-- resources파일을 만들고 -> 우클릭 -> new -> other -> XML검색 -> xml파일 선택후 -> mybatisConfig.xml왼료 -->
+<!-- DB연결하기 위한 곳?? -->
+<!-- SessionFactory의  myBatisConfig.xml"를 사용하기 위해서는 src에 파일을 만들어 작업??? -->
+
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd"> <!-- ==> mybatis를 사용할 것이라고 알려주는 코드 -->
+        
+        
+        <!-- 다음으로 3가지 작업을 해준다 -->
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="Question" type="qna.vo.Question" />  <!--qna.vo.Questiondptj Question이라고 부른다고 알려주는 작업  -->
+	</typeAliases>
+	
+	
+
+<environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/qna"/> <!-- 이름 작성-->
+                <property name="username" value="seonghunid"/>			<!-- 아이디 작성 -->
+                <property name="password" value="seonghunpw"/>		<!-- 비번 작성 -->
+            </dataSource>
+        </environment>
+    </environments>       			<!-- =>mysql(DB)에 연결을 해주는 작업  -->
+    
+    <mappers>
+    	<mapper resource="QuestionDao.xml" />
+    </mappers>    		  <!-- 쿼리가 xml파일 어디 있는지 위치를 알려준다 -->
+    
+
+</configuration>
+        
+        
+        
+        
+        
+        

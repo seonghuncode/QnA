@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  -->
+
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  <!--  -->
+        
+        
+<!--  저장하는 로직??만든다 -->
+<!-- QquestionDao랑 연결을 하기 위해 위치를 알려준다 -->
+<mapper namespace="qna.dao.QuestionDao">
+
+	<resultMap id="result" type="Question">  <!-- ==> Question에 만든 필드를 DB외 연결하기 위해 만들어 준다 -->
+	
+		<result property="id" column="id" />   <!-- ==> Question의 id필드와 DB에 있는 id가 연결되도록 -->
+		<result property="title" column="title" />  <!-- Db외 어떤 컬럼의 매치가 되는지 -->
+		<result property="body" column="body" /> 
+		<result property="regDate" column="regDate" /> 
+		<result property="updateDate" column="updateDate" /> 
+	
+	</resultMap>
+	
+	<insert id="save" parameterType="Question" useGeneratedKeys="true" keyProperty="id"> 
+	<!-- useGeneratedKeys = 오토인크리먼트의 기능 (어떤 컬럼에게 기능을 줄지 알려준다)-> keyProperty="id -->  
+		insert into question (title, body) <!-- 받은 title,body를 -> question 테이블에 title, body를 넘겨준다 -->
+		values (#{title}, #{body})
+	</insert>
+
+</mapper>
+
+
+
+
