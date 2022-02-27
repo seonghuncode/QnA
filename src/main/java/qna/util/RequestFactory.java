@@ -7,8 +7,12 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data //안에 get set이 다 들어와 있다 아래 코드대신 사용 가능
 public class RequestFactory {
+	//==> requestFactory의 역할 -> request, response가 들어왔을때 utf, html이다.
 	
 	private HttpServletRequest req; // -->req로 줄인다
 	private HttpServletResponse resp;
@@ -42,20 +46,23 @@ public class RequestFactory {
 		
 		//requestDispatcher.forward(req, resp); -> ctrl + 1 -> try, catch사용
 		try {
-			requestDispatcher.forward(req, resp);
-		} catch (ServletException | IOException e) {
+			requestDispatcher.forward(req, resp); //요청과 응답을 항상 같이 보내주어야 한다??
+		} catch (ServletException | IOException e) { //catch(Eception e)로 시용해도 가능 --> 모든 오류 상황을 고려
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	//이걸 해주었기 때문에 questionController 에서 factory.forwardToJsp("usr/question/add");이렇게 사용이 가능하다.
 	
-	public HttpServletRequest getReq() {
-		return this.req;
-	}
-	
-	public HttpServletResponse getResp() {
-		return this.resp;
-	}
+	//아래의 작업은 위의 작업을 밖에서 뽑아 사용하기 위해서 만들어 준것이다.
+	//여기 들어오는 값들을 사용하기 위해서 맨위에서 req, resp는 줄인말이다.
+//	public HttpServletRequest getReq() {
+//		return this.req;
+//	}
+//	
+//	public HttpServletResponse getResp() {
+//		return this.resp;
+//	}    //== or 맨위에 @Data로 input하여 사용 가능하다
 	
 	
 	

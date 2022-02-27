@@ -7,22 +7,27 @@
 <title>질문하기</title>
 </head>
 <body>
-	<div>
+	<div class="">
 		<h1>질문하기</h1>
 	</div>
 	
-	<div>
-		<form action="/question/q/add" method="post">
+	<div class="question=form-container">
+	
+		<form action="/question/add" method="post">
+		
 		<div>
 			<input type = "text" name="title" />
 		</div>
+		
 		<div>
 			<input type = "text" name="body"/>
 		</div>
-		<div>
-			<button type="submit">질문하기 </button>
+		
+		<div class="">
+			<button>질문하기 </button> <!-- 타입을 안적어 주어도 된다. -->
 			<button type="button"> 취소 </button>
 		</div>
+		
 		</form>
 	</div>
 	
