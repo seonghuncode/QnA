@@ -8,7 +8,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data //안에 get set이 다 들어와 있다 아래 코드대신 사용 가능
 public class RequestFactory {
@@ -65,6 +64,19 @@ public class RequestFactory {
 //	}    //== or 맨위에 @Data로 input하여 사용 가능하다
 	
 	
+	public void redirectToJsp(String path) {
+		
+		//첫번째 화면에서 두번째 화면으로가서 질문하기를 누르면 아무 화면도
+		//안나오는 상황에서 첫번째 화면으로 돌려주는 역할
+		//resp.sendRedirect(path);
+		try {
+			resp.sendRedirect(path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 	

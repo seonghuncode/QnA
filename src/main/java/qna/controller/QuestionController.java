@@ -36,6 +36,8 @@ public class QuestionController extends HttpServlet {
 		
 		questionService.save(title, body); //save에게 넘겨준다
 		
+		factory.redirectToJsp("/");
+		
 	}
 //
 }
