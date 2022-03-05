@@ -23,7 +23,7 @@ public class Question {
 		updateDate = LocalDateTime.now();
 		
 	}
-	
+	//
 	
 
 }

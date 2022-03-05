@@ -20,7 +20,7 @@ public class QuestionController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestFactory factory = new RequestFactory(request, response);
-		factory.forwardToJsp("usr/question/add"); //use(유저) , ("/WEB-INF" + path + ".jsp")여기 들어간다
+		factory.forwardToJsp("usr/question/add"); //usr(유저) , ("/WEB-INF" + path + ".jsp")여기 들어간다
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,5 +37,5 @@ public class QuestionController extends HttpServlet {
 		questionService.save(title, body); //save에게 넘겨준다
 		
 	}
-
+//
 }

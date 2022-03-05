@@ -28,5 +28,5 @@ public class QuestionService {
 		sqlSession.commit(); //
 		sqlSession.close();
 	}
-
+//
 }
