@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import qna.service.QuestionService;
 import qna.util.RequestFactory;
 
-
 @WebServlet("/question/add")
 public class QuestionController extends HttpServlet {
 	
