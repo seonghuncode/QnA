@@ -17,6 +17,8 @@ public class QuestionService {
 		
 		SqlSession session = SessionFactory.getSession(); //SessionFactory에서 get을 사용하면 호출을 하면서 세션이 열린다??
 		questionDao = session.getMapper(QuestionDao.class); //Dao class를 다 가지고 온다??	
+		
+		this.sqlSession = session; //받아주어야 한다.
 	}
 	
 	public void save(String title, String body) {
@@ -26,7 +28,7 @@ public class QuestionService {
 		questionDao.save(question); //questionDao여기로 넘긴다
 		
 		sqlSession.commit(); //
-		sqlSession.close();
+		
 	}
 //
 }
