@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import qna.app.components.Component;
-import qna.app.configuration.SessionFactory;
 import qna.app.dao.QuestionDao;
 import qna.web.controller.QuestionController;
+import qna.web.repository.QuestionRepository;
 import qna.web.service.QuestionService;
 
 public class AppContainer {
@@ -18,16 +18,23 @@ public class AppContainer {
 	public static QuestionDao questionDao; //QuestionDAo를 가지고 온다
 	
 	public static QuestionController questionController;
-	public static QuestionService questionservice;
+	public static QuestionService questionService;
+	public static QuestionRepository questionRepository;
 	
 	public static void componentAssemble() {
 		//component들을 조림하는 역할
 		
 		componentContainer = new ArrayList<>();
 		
-		questionDao = SessionFactory.getSession().getMapper(QuestionDao.class);
+		questionRepository = addComponent(new QuestionRepository()); //리포지토리 연결
+
+		questionService = addComponent(new QuestionService());
 		
 		questionController = addComponent(new QuestionController());
+		
+		for(Component component : componentContainer) {
+			component.autoWried();
+		}
 		
 	}
 	

@@ -10,14 +10,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.Data;
 
 @Data //안에 get set이 다 들어와 있다 아래 코드대신 사용 가능
-public class RequestFactory {
+public class AppRequest {
 	//==> requestFactory의 역할 -> request, response가 들어왔을때 utf, html이다.
 	
 	private HttpServletRequest req; // -->req로 줄인다
 	private HttpServletResponse resp;
 	
+	//
+	public String getReqUri() {
+		return this.req.getRequestURI(); //uri를 가지고 온다
+	}
+	
+	public String getMethod() {
+		return this.req.getMethod(); //멧호드를 가지고 온다
+	}
+	
+	
 	//생서아를 만들어 준다
-	public RequestFactory(HttpServletRequest req, HttpServletResponse resp) {
+	public AppRequest(HttpServletRequest req, HttpServletResponse resp) {
 		
 		//req.setCharacterEncoding("UTF-8"); --> ctrl + 1 --> catch클릭 하면 아래처럼 나온다
 		try {

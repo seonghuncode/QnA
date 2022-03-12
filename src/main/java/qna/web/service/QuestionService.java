@@ -10,6 +10,15 @@ import qna.web.vo.Question;
 //MVC패턴의 m(model)에 해당하는 역할 (sercice는 dao랑만 얘기한다??)
 public class QuestionService implements Service {
 	
+	
+	// QuestionService > ctrl + 1 > add.....
+		@Override
+		public void autoWried() {
+			// TODO Auto-generated method stub
+			
+		}
+	
+	
 	private QuestionDao questionDao; //(sercice는 dao랑만 얘기한다??) --> 불러와 준다.
 	private SqlSession sqlSession;
 	
@@ -33,10 +42,5 @@ public class QuestionService implements Service {
 	}
 //
 
-	// QuestionService > ctrl + 1 > add.....
-	@Override
-	public void autoWried() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

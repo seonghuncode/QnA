@@ -1,69 +1,85 @@
 package qna.app.util;
 
+import lombok.Getter;
+
+@Getter
 public class UriProcessor {
 //uri를 받아서 나누어 준다
 							// question/add, question/modify, question/delete(question은 변동이 없다)
-	private String uri; // 이렇게 만들어 지기를 원하낟 -> /[controller uri code]/[행위에 대한것]/[그 정보에 대한 id]
-private String splitedUri;
-													// == /[question]/[delete]/[id]
-													//이런 단위로 쪼개는 작업을 해준다
-	//class가 생성될때 외부에서 받아주기 위해 생성자를 만들어 준다
-	public UriProcessor(String uri) {
-		this.uri = uri;
-	}
+	private String requestUri; // 이렇게 만들어 지기를 원하낟 -> /[controller uri code]/[행위에 대한것]/[그 정보에 대한 id]
 	
-	public String getControllerCode() {
-		//위의 첫번째로 나누는 controller uri code를 가지고 와서 -> 해당 처리 과정으로 가게 나누어 주는??작업??
+	private boolean isIndex = false; //요청을 나누어준다?
+	
+	private boolean isValid = false; //url이 유효한지 안한지 판단할때
+	
+	private String ControllerCode = ""; //question 인지 answer인지 그것이 들어간다
+	
+	private int targetIndex = 0; //수정, 삭제할때 번호를 뽑아준다.
+	
+	//생성자
+	public UriProcessor(String requestUri) { //이클래스가 생성될때 requestUri를 받아 넣어주고
 		
-		//예외처리를 해준다 /를 적는 사람도 있고 안쓰는 사람도 있기 때문에 그러한 것을 위한
+		this.requestUri = requestUri;
 		
-		try {
-			
-//			uri.split("/"); -> local varible
-			String[] splitedUri = uri.split("/"); // /로 쪼개주는 역할을 한다
-			
-//			splitedUri[1];      /[]/[]/[]
-			String controllerCode = splitedUri[1]; // 배열은 0부터 시작인데 /게 공백으로 들어가기 때문에 0번을 가지고 가기때문에
-			
-			switch(controllerCode) {
-				case "question":
-					return controllerCode; //question이 아니고 없는것을 입력 또는 /나눌수 없을때 exception이 잡아주게 된다.
+		if(requestUri.equals("/qna/") || requestUri.equals("/qna")) { 
+		//서비스를 들어왔을때 무전건 qna를 붙이는데 사람이 입력하는 두가지 경우를 생각해서 만들어 준다.
+			this.isIndex = true;
+			this.isValid = true; //이렇게 되면 true값을 주어라
+		}
+		
+		//쪼개주는 코드 부분
+//		requestUri.split("/"); //ctrl + 1
+		String[] splitUri = requestUri.split("/"); 
+		//ex) 위에서 들어온 요청이 / 로 쪼개어 진다 --> localhost8080//qna/questions/add
+		//String[] --ex)쪼개면--> /qna/questions/1 --> 공백, qna, questions , 1 -> 0,1,2,3 ==> 4개가 나온다.
+		
+		//쪼개진거에 대한 갯수 가 다르다
+		if(splitUri.length >= 3) {
+			switch(splitUri[2]) { //필요한 값이 두번째 이기때문에
+				case "questions":
+				case "question": //사용자가 s를 빼먹는 실수를 해도 가능하도록 하나더 만들어 준다.
+					this.ControllerCode = "question";
+					this.isValid = true;
+					break;	
+			//question anser의 두경우로 만들어 준다.
+				case "answers":
+				case "answer":
+					this.ControllerCode = "answers";
+					this.isValid = true;
+					break;
 				default:
-					throw new IllegalArgumentException("올바른 요청이 아닙니다.");
+					this.ControllerCode = "";
+					break;
+			
 			}
-			
-		}catch(Exception e) { //어떤 에러가 났을때 아래처럼 나오게 해라
-			throw new IllegalArgumentException("올바른 요청이 아닙니다.");
 		}
 		
-		
-	}
-
-	
-	
-	public String getProcessCode() {
-		//커트롤러에서 수행할 코드를 리턴해주는 역할
-		
-		try {
-		
-			//uri.split("/");
-			String[] splitedUri = uri.split("/");  // /로 쪼개주는 역할
+		if(splitUri.length == 4) { //이숫자가 왔을때 3을 넣어준다??
 			
-			//위에서의 나눈 것들중 2번을 뽑아는 과정을 만드는 코드
-//			splitedUri[2];  -> ctrl + 1 
-			String processCode = splitedUri[2]; 
+			try {
 			
-			return processCode;
+			this.targetIndex = Integer.parseInt(splitUri[3]); //url은 String -> 형변환
+			this.isValid = true;
 			
+			}catch(Exception e) {
+				this.targetIndex = 0;
+			}
+		}else if(splitUri.length >= 5) { ////5개가 나오는 경우	
 			
-		}catch(Exception e) {
+			try {
+				this.targetIndex = Integer.parseInt(splitUri[4]);
+				this.isValid = true;
 			
-			throw new IllegalArgumentException("올바른 요청이 아닙니다.");
+			}catch(Exception e) {
+				this.targetIndex = 0;
+				this.isValid = false;
+			}
 		
 		}
+			
 		
 	}
-	
+		
 	
 	
 }

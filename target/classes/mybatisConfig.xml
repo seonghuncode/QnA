@@ -12,8 +12,8 @@
         <!-- 다음으로 3가지 작업을 해준다 -->
 <configuration>
 
-	<typeAliases>
-		<typeAlias alias="Question" type="qna.vo.Question" />  <!--qna.vo.Questiondptj Question이라고 부른다고 알려주는 작업  -->
+	<typeAliases> <!-- web이 생겼기 때문에 추가 -->
+		<typeAlias alias="Question" type="qna.web.vo.Question" />  <!--qna.vo.Questiondptj Question이라고 부른다고 알려주는 작업  -->
 	</typeAliases>
 	
 	
