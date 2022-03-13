@@ -14,7 +14,21 @@ public class UriProcessor {
 	
 	private String ControllerCode = ""; //question 인지 answer인지 그것이 들어간다
 	
+	private String actionCode = "";
+	
 	private int targetIndex = 0; //수정, 삭제할때 번호를 뽑아준다.
+	
+	
+	public void printCurrentStatus() {
+		System.out.println("================");
+		System.out.println("requestUri :" + requestUri);
+		System.out.println("isIndex :" + isIndex);
+		System.out.println("isValid :" + isValid);
+		System.out.println("ControllerCode :" + ControllerCode);
+		System.out.println("targetIndex :" + targetIndex);
+		System.out.println("=================");
+	}
+	
 	
 	//생성자
 	public UriProcessor(String requestUri) { //이클래스가 생성될때 requestUri를 받아 넣어주고
@@ -59,19 +73,23 @@ public class UriProcessor {
 			try {
 			
 			this.targetIndex = Integer.parseInt(splitUri[3]); //url은 String -> 형변환
+			this.actionCode = "detail";
 			this.isValid = true;
 			
 			}catch(Exception e) {
+				this.actionCode = splitUri[3];
 				this.targetIndex = 0;
 			}
 		}else if(splitUri.length >= 5) { ////5개가 나오는 경우	
 			
 			try {
 				this.targetIndex = Integer.parseInt(splitUri[4]);
+				this.actionCode = splitUri[3];
 				this.isValid = true;
 			
 			}catch(Exception e) {
 				this.targetIndex = 0;
+				this.actionCode = splitUri[3];
 				this.isValid = false;
 			}
 		

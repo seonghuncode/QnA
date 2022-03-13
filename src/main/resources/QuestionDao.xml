@@ -27,6 +27,25 @@
 		insert into question (title, body) <!-- 받은 title,body를 -> question 테이블에 title, body를 넘겨준다 -->
 		values (#{title}, #{body})
 	</insert>
+	
+	<select id="findAll" resultMap="result">
+		select *
+		from question; <!-- 붜리가 날라간다. -->
+	</select>
+	
+	<select id ="findById" parameterType="int" resultMap="result">
+	SELECT *
+	FROM question
+	WHERE id = #{id}
+	</select>
+	
+	<update id="modify" parameterType="Question">
+	UPDATE question
+	SET title = #{title},
+	body = #{body},
+	updateDate = NOW()
+	WHERE id = #{id}
+	</update>
 
 </mapper>
 

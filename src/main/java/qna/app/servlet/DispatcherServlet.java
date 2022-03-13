@@ -37,16 +37,18 @@ public class DispatcherServlet extends HttpServlet {
 		UriProcessor uriProcessor = new UriProcessor(appRequest.getReqUri());
 		
 		if(uriProcessor.isIndex()) {
-			appRequest.forwardToJsp("index");
+			appRequest.render("index");
 		}
 		
 		//에러페이지를 보여주게끔
-		if(uriProcessor.isValid() || uriProcessor.getControllerCode().equals("")) {
+		if( !uriProcessor.isValid() || uriProcessor.getControllerCode().equals("")) {
 			exceptionHandler.handlerRequest(appRequest);
 		}
 		
 		//controller코드??
 		Controller findController = findController(uriProcessor.getControllerCode());
+		
+		uriProcessor.printCurrentStatus();
 		
 		switch(appRequest.getMethod()) {
 		
@@ -72,7 +74,7 @@ public class DispatcherServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-	
+		doGet(request, response);
 	}
 
 }

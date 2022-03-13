@@ -7,7 +7,7 @@ public class ExceptionHandler implements Handler {
 
 	@Override
 	public void handlerRequest(AppRequest appRequest) {
-		appRequest.forwardToJsp("error/error");
+		appRequest.render("error/error");
 		
 	}
 //오류가 생겼을때 이 페이지를 보여준다

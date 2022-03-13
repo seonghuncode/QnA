@@ -1,46 +1,69 @@
 package qna.web.service;
 
-import org.apache.ibatis.session.SqlSession;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import qna.app.components.Service;
-import qna.app.configuration.SessionFactory;
-import qna.app.dao.QuestionDao;
+import qna.app.container.AppContainer;
+import qna.web.repository.QuestionRepository;
 import qna.web.vo.Question;
 
 //MVC패턴의 m(model)에 해당하는 역할 (sercice는 dao랑만 얘기한다??)
 public class QuestionService implements Service {
 	
 	
+	private QuestionRepository questionRepository;
+	
+	
 	// QuestionService > ctrl + 1 > add.....
 		@Override
 		public void autoWried() {
 			// TODO Auto-generated method stub
-			
+			this.questionRepository = AppContainer.questionRepository;
 		}
 	
 	
-	private QuestionDao questionDao; //(sercice는 dao랑만 얘기한다??) --> 불러와 준다.
-	private SqlSession sqlSession;
 	
-	//생성자를 만든다
-	public QuestionService() {
-		
-		SqlSession session = SessionFactory.getSession(); //SessionFactory에서 get을 사용하면 호출을 하면서 세션이 열린다??
-		questionDao = session.getMapper(QuestionDao.class); //Dao class를 다 가지고 온다??	
-		
-		this.sqlSession = session; //받아주어야 한다.
-	}
+	
+	
 	
 	public void save(String title, String body) {
 		
-		Question question = new Question(title, body); // 여기에 title, body를 넣어준다. Question 클래스에 들어가서 비교하면서 이해
-		//그럼 Question에서 현재시간... 같이 들어간다
-		questionDao.save(question); //questionDao여기로 넘긴다
-		
-		sqlSession.commit(); //
+		questionRepository.save(title, body);  //받아온 title,body를 여기에 넘겨준다.
 		
 	}
 //
+
+
+
+
+
+
+	public List<Question> findAll() {
+		return questionRepository.findAll();
+	}
+
+
+
+
+
+
+	public Question findById(int id) {
+		Question findById = questionRepository.findById(id);
+		
+		if(findById != null) {
+			return findById;
+		}else {
+			throw new NoSuchElementException("해당 질문은 존재 하지 않습니다.");
+		}
+	}
+
+
+	public void modify(Question question) {
+		
+		questionRepository.modify(question);
+		
+	}
 
 	
 }

@@ -9,8 +9,8 @@
 <body>
 
 	<h1>인텍스 입니다.</h1>
-	<div class="">  <!-- 지금은 비워나도 된다 -->
-		<a href="/question/add">
+	<div class="link-container">  <!-- 지금은 비워나도 된다 -->
+		<a href="/qna/questions/add">
 			<span>질문하러 가기</span>
 		</a>
 	

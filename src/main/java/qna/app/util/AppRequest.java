@@ -47,8 +47,47 @@ public class AppRequest {
 	}
 	
 	
+	private void print(String msg) {
+		
+		try {
+			resp.getWriter().append(msg);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} //-> 줄바꿈이 없다
+		
+	}
+	
+	private void println(String msg) {
+		print(msg + "\r\n");
+	} //-> 줄바꿈이 있다
+	
+	
+	
+	public void alterRedirect(String path, String msg) {
+		println("<script>");  //자바 스크립트를 보여줄 수 았다>>
+		println("alter('" + msg +"')");
+		println("window.location.replace('" + path +"')");
+		println("/<script>");
+	}
+	
+	//둘을 합처주는 작업을 한것이다 아래의 두개
+	public void render(String path) {
+		
+		//redirect로 시작하면
+		if(path.startsWith("redirect:")) {
+			
+//			path.split("redirect:"); ctrl + 1
+			String[] split = path.split("redirect:");
+			redirectToJsp(split[1]);
+		}else {
+			forwardToJsp(path);
+		}
+	}
+	
+	
 	//jsp로 보내주는 로직
-	public void forwardToJsp(String path) {
+	private void forwardToJsp(String path) {
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/" + path + ".jsp");
 		// -->path만 입력해주면 이동하게 만들어 준다 자동으로
 		
@@ -74,7 +113,7 @@ public class AppRequest {
 //	}    //== or 맨위에 @Data로 input하여 사용 가능하다
 	
 	
-	public void redirectToJsp(String path) {
+	private void redirectToJsp(String path) {
 		
 		//첫번째 화면에서 두번째 화면으로가서 질문하기를 누르면 아무 화면도
 		//안나오는 상황에서 첫번째 화면으로 돌려주는 역할
@@ -88,6 +127,14 @@ public class AppRequest {
 		
 	}
 	
+	public <T> T getAttribute(String name, Class<T> type) {
+		
+		return type.cast(req.getParameter(name));
+	}
+	
+	public void addAttribute(String name, Object object) {
+		this.req.setAttribute(name, object);
+	}
 	
 	
 }

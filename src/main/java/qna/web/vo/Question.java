@@ -2,6 +2,11 @@ package qna.web.vo;
 
 import java.time.LocalDateTime;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter //-->vo에 getter를 달아야 question.list.jsp에서 값을 꺼낼 수 있다.
+@Setter
 //vo의 역할을 하게 된다.
 public class Question {
 	
