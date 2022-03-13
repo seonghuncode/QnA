@@ -33,19 +33,22 @@
 		from question; <!-- 붜리가 날라간다. -->
 	</select>
 	
-	<select id ="findById" parameterType="int" resultMap="result">
-	SELECT *
-	FROM question
-	WHERE id = #{id}
-	</select>
-	
+	<select id="findById" parameterType="int" resultMap="result">
+        SELECT *
+        FROM question
+        WHERE id = #{id}
+    </select>
+
+
 	<update id="modify" parameterType="Question">
-	UPDATE question
-	SET title = #{title},
-	body = #{body},
-	updateDate = NOW()
-	WHERE id = #{id}
-	</update>
+        UPDATE question
+        SET title = #{title},
+        body = #{body},
+        updateDate = NOW()
+        WHERE id = #{id}
+    </update>
+	
+	
 
 </mapper>
 

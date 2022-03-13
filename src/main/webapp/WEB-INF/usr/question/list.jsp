@@ -18,6 +18,7 @@
 	<div class="">
 		<p>제목 : ${question.title}</p>
 		<p>내용 : ${question.body}</p>
+		<hr />
 	</div>
 	
 	</c:foreach>
